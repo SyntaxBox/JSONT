@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(
+      65.5deg,
+      rgb(23, 205, 205) -15.1%,
+      rgb(23, 25, 95) 71.5%
+    )
+    no-repeat center center fixed;
+  color: white;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-size: 200% 200%;
+  animation: rotate-gradient 20s ease infinite alternate;
+  -webkit-animation: rotate-gradient 20s ease infinite alternate;
+}
+
+@keyframes rotate-gradient {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "jsoneditor": "^10.1.0",
     "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18"

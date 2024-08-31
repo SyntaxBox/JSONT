@@ -21,5 +21,7 @@ export async function translateJSON(
 }
 
 export async function translateStrings(data: string[], lang: string) {
-  return await translate(data, { to: lang });
+  return await translate(data, {
+    to: lang,
+  });
 }

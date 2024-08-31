@@ -7,9 +7,11 @@ import { editor } from "monaco-editor"; // Correct import for IStandaloneCodeEdi
 export default function JSONEditor({
   data,
   immutable,
+  onChange,
 }: {
   data?: string;
   immutable?: boolean;
+  onChange?: (data: string) => void;
 }) {
   const [jsonContent, setJsonContent] = useState(data);
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
@@ -20,6 +22,7 @@ export default function JSONEditor({
 
   const handleChange = (value: string | undefined) => {
     setJsonContent(value);
+    value && onChange && onChange(value);
   };
 
   const format = () => {

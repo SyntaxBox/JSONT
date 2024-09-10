@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Editor, { OnMount } from "@monaco-editor/react";
 import { editor } from "monaco-editor"; // Correct import for IStandaloneCodeEditor
 
@@ -25,9 +25,20 @@ export default function JSONEditor({
     value && onChange && onChange(value);
   };
 
-  const format = () => {
-    editorRef.current?.trigger("format", "editor.action.formatDocument", null);
-  };
+  useEffect(() => {
+    setJsonContent(data);
+    const t = setTimeout(
+      () =>
+        editorRef.current?.trigger(
+          "format",
+          "editor.action.formatDocument",
+          null,
+        ),
+      200,
+    );
+
+    return () => clearTimeout(t);
+  }, [data]);
 
   return (
     <Editor
@@ -40,7 +51,6 @@ export default function JSONEditor({
         minimap: { enabled: false },
         formatOnPaste: true,
         formatOnType: true,
-        readOnly: immutable,
         wordWrap: "on",
       }}
       language="json"

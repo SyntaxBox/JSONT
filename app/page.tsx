@@ -1,32 +1,40 @@
 "use client";
 import JSONEditor from "@/components/JSONEditor";
-import { debounce } from "lodash";
-import { useCallback } from "react";
+import LanguagesSelector from "@/components/LanguagesSelector";
+import { useState } from "react";
 
 export default function Home() {
-  const handleChange = async (e: string) => {
+  const [translatedText, setTranslatedText] = useState("");
+  const [text, setText] = useState("");
+  const [language, setLanguage] = useState("auto");
+  const handleSubmit = async () => {
+    if (language === "auto") return text;
     const res = await fetch("/api/translate", {
       body: JSON.stringify({
-        json: e,
-        language: "ar",
+        json: text,
+        language: language,
       }),
       method: "POST",
     });
-    console.log(await res.json());
+    setTranslatedText(await res.text());
   };
 
-  // Use useCallback to memoize the debounced version of handleChange
-  const debouncedHandleChange = useCallback(
-    debounce(handleChange, 500), // 500ms delay
-    [],
-  );
-
   return (
-    <main className="h-full flex flex-col">
-      <h1 className="text-2xl font-bold mb-4">JSON Editor</h1>
+    <main className="h-full flex flex-col w-full">
+      <div className="flex gap-3 justify-between items-center w-full p-2">
+        <h1 className="text-2xl font-bold">JSON Editor</h1>
+        <button
+          type="button"
+          className="inline-flex justify-center px-10 rounded-md border border-gray-300 shadow-sm py-2 bg-white text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 uppercase"
+          onClick={handleSubmit}
+        >
+          Translate
+        </button>
+        <LanguagesSelector onSelect={(lang) => setLanguage(lang)} />
+      </div>
       <div className="flex h-full">
-        <JSONEditor onChange={debouncedHandleChange} />
-        <JSONEditor immutable />
+        <JSONEditor onChange={setText} />
+        <JSONEditor immutable data={translatedText} />
       </div>
     </main>
   );

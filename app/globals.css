@@ -13,3 +13,10 @@ body {
   width: 100vw;
   overflow: hidden;
 }
+
+code {
+  border: 1px solid #ccc;
+  background-color: #f2f2f220;
+  border-radius: 5px;
+  padding: 0.15em 0.25em;
+}

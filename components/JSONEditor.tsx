@@ -29,6 +29,7 @@ export default function JSONEditor({
     setJsonContent(data);
     const t = setTimeout(
       () =>
+        immutable &&
         editorRef.current?.trigger(
           "format",
           "editor.action.formatDocument",

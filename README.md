@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JSONT (JSON Translate)
+
+**JSONT** is a simple web application designed to facilitate translation of JSON files. It allows users to edit and translate JSON files using the Monaco Editor, with support for drag-and-drop functionality and saving shortcuts.
+
+You can access it via <https://jsont.syntaxbox.dev>
+
+## Features
+
+- **Monaco Editor** for editing JSON files
+- Translation powered by **google-translate-api-x**
+- **Drag-and-Drop** support for easy file import
+- **Keyboard shortcut**: `Ctrl + S` to save the translated JSON file
+- Language specification required before translating
+- Translation is triggered by clicking the **Translate** button
 
 ## Getting Started
 
-First, run the development server:
+1. **Edit JSON**: Load or paste your JSON file into the Monaco Editor.
+2. **Select Language**: Specify the language you want to translate your JSON content into.
+3. **Translate**: Click the **Translate** button to translate the JSON file into the specified language.
+4. **Save**: Use `Ctrl + S` to save your translated JSON file.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   git clone https://github.com/syntaxbox/jsont.git
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Install dependencies:
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Run the project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   3.1 Dev Server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+   3.2 Production Server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run build && npm start
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions are welcome! If you’d like to contribute to **jsont**.

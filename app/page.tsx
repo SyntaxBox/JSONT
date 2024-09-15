@@ -46,7 +46,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [text]);
+  }, [translatedText]);
 
   return (
     <>

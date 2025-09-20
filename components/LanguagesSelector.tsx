@@ -8,12 +8,18 @@ const LanguageSelector = ({
   onSelect: (value: string) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
 
   const handleSelectLanguage = (language: string) => {
     setSelectedLanguage(language);
     onSelect(language);
     setIsOpen(false);
+  };
+
+  const getSelectedLanguageLabel = () => {
+    if (!selectedLanguage) return "Select Language";
+    const label = languages[selectedLanguage as keyof typeof languages];
+    return typeof label === "string" ? label : selectedLanguage;
   };
 
   return (
@@ -25,7 +31,7 @@ const LanguageSelector = ({
           onClick={() => setIsOpen(!isOpen)}
           onBlur={() => setTimeout(() => setIsOpen(false), 100)}
         >
-          {selectedLanguage ? selectedLanguage : "Select Language"}
+          {getSelectedLanguageLabel()}
           <span className="ml-2 rotate-90 -mr-1 h-5 w-5" aria-hidden="true">
             &gt;
           </span>
@@ -40,16 +46,19 @@ const LanguageSelector = ({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {Object.entries(languages).map(([value, label], i) => (
-              <button
-                key={i}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-                onClick={() => handleSelectLanguage(value)}
-              >
-                {typeof label === "string" && label}
-              </button>
-            ))}
+            {Object.entries(languages).map(([value, label]) => (
+  <button
+    key={value} // use value for stable React key
+    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+    role="menuitem"
+    onMouseDown={() => {
+      handleSelectLanguage(value); // use onMouseDown instead of onClick
+    }}
+  >
+    {typeof label === "string" && label}
+  </button>
+))}
+
           </div>
         </div>
       )}
